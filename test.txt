@@ -1,1 +1,3 @@
-hello
+je veux savoir si lorsque j'importe le fichier audio
+quand je fais play, elle ecoute ce qui est dit , la transcris pour chaque locuteur un peu comme du chat de dialogue
+revoi le code du frontend si il y a des correctif en back il faut en tenir compte
