@@ -1,0 +1,159 @@
+paths:
+  inputs_dir: inputs
+  work_dir: work
+  exports_dir: exports
+  logs_dir: logs
+
+defaults:
+  lang: fr
+  detect_language: false
+  model: large-v3
+  profile: stable
+  export_formats:
+    - md
+    - json
+    - vtt
+
+outputs:
+  clean_txt_mode: human # human|machine
+  clean_jsonl_payload: both # human|machine|both
+
+numbers:
+  human_numbers: true
+  whitelist_patterns:
+    - "\\bR2-D2\\b"
+    - "\\bM1\\s+Max\\b"
+    - "\\b\\d+\\s?(kg|mm)\\b"
+
+typography:
+  locale: auto
+
+preproc:
+  target_sr: 16000
+  channels: 1
+  loudnorm: true
+  vad:
+    enabled: false
+    silence_duration: 0.0
+    silence_threshold: -40
+
+segmenter:
+  segment_length: 75.0
+  overlap: 8.0
+  sample_rate: 16000
+  channels: 1
+  manifest_name: manifest.csv
+
+asr:
+  device: metal
+  compute_type: auto
+  beam_size: 1
+  best_of: 1
+  temperature: 0.0
+  temperature_fallback: 0.2
+  vad_filter: false
+  word_timestamps: false
+  condition_on_previous_text: false
+  no_speech_threshold: 0.6
+  max_workers: 8
+  max_retries: 2
+
+align:
+  device: auto
+  language: fr
+  model_name: null
+
+cleaning:
+  min_segment_duration: 1.2
+  max_segment_gap: 1.2
+  remove_fillers: true
+  capitalize_sentence_start: true
+  normalization:
+    normalize_apostrophes: true
+    normalize_numbers: true
+    number_language: fr
+    max_word_repeat: 2
+    tic_markers:
+      - euh
+      - du coup
+      - donc donc
+  redundancy:
+    enabled: true
+    similarity: 0.92
+    window: 4
+    min_chars: 12
+  confidence:
+    segment_threshold: 0.55
+    word_threshold: 0.45
+    drop_segments: false
+  audit_sample_size: 6
+
+structure:
+  target_section_duration: 180
+  max_section_duration: 480
+  min_pause_gap: 6.0
+  soft_min_duration: 150
+  trim_section_titles: true
+  title_case: sentence
+  enable_titles: true
+
+polish:
+  enabled: true
+  strip_oral_markers: true
+  oral_markers:
+    - tu vois
+    - voilà
+    - genre
+    - bref
+
+export:
+  json_indent: 2
+  low_confidence:
+    threshold: 0.5
+    csv_threshold: 0.35
+    csv_enabled: true
+    csv_output: null
+    formats:
+      md:
+        template: "**[{word}?]**"
+      json:
+        template: null
+
+diarization:
+  model: pyannote/speaker-diarization-3.1
+  authorization_env: PYANNOTE_TOKEN
+  merge_single_speaker: false
+  max_speakers: 0
+  min_speaker_turn: 0.9
+  mode: multi
+  speech_mask: false
+  speech_mask_margin: 0.15
+  pipeline_params:
+    segmentation:
+      min_duration_on: 0.15
+      min_duration_off: 0.15
+      onset: 0.4
+      offset: 0.4
+    clustering:
+      threshold: 0.65
+
+refine:
+  enabled: false
+
+glossary:
+  dynamic: true
+  min_length: 3
+  entries:
+    - ChatGPT
+
+chunking:
+  enabled: true
+  target_tokens: 320
+  max_tokens: 420
+  min_tokens: 180
+  min_sentences: 2
+  overlap_sentences: 1
+
+audit:
+  enabled: true
+  max_examples: 6

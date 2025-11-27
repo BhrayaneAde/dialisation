@@ -1,0 +1,88 @@
+# --- Python virtual environments ---
+.venv/
+transcribe-suite/.venv/
+.env.local
+
+# --- Node.js ---
+node_modules/
+frontend-react/node_modules/
+npm-debug.log
+yarn-error.log
+.npm
+
+# --- Build/output artifacts ---
+transcribe-suite/build/
+transcribe-suite/out/
+transcribe-suite/logs/
+transcribe-suite/exports/
+transcribe-suite/results/
+
+# --- Working / temporary directories ---
+transcribe-suite/work/
+transcribe-suite/tmp/
+transcribe-suite/tests/output/
+transcribe-suite/tests/tmp/
+frontend-react/dist/
+frontend-react/.vite/
+
+# --- Audio / video files (too large for Git) ---
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.mp4
+*.mov
+*.mkv
+*.webm
+
+# --- Model weights / checkpoints / embeddings ---
+*.pt
+*.bin
+*.ckpt
+*.onnx
+*.safetensors
+*.tflite
+*.h5
+*.mlmodel
+*.npy
+*.npz
+
+# --- Cache files ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.tmp
+*.log
+*.bak
+*.swp
+.pytest_cache/
+.coverage
+
+# --- OS / Editor files ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.code-workspace
+*.swp
+*~
+
+# --- Environment files (secrets) ---
+.env
+.env.local
+.env.*.local
+
+# --- Misc ---
+*.lock
+*.csv
+*.jsonl
+*.sqlite
+*.db
+dist/
+build/
+*.egg-info/
+.Python
+
